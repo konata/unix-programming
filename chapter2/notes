@@ -1,0 +1,80 @@
+du -a ;; 列出所有文件的大小(占用磁盘块数)
+grep keyword filename
+grep -iR keyword dirname
+setuid位 ;; -rwsr-xr-x 运行当前文件的时候拥有owner的uid
+比如
+/etc/passwd owner是root,只有root能编辑
+
+
+$ ls -al /etc/passwd
+-rw-r--r-- 1 algerwang root 699 九月 16 11:17 /etc/passwd
+
+而/bin/passwd 
+是-rwsr-xr-x,当一般用户在执行passwd的时候,用户会变成passwd的属主身份,所以可以改动passwd,但是因为没有w权限,所以不可能修改/bin/passwd的实现用以实现其他功能
+
+
+ls -ld ./
+查看目录
+rm 只管当前目录的permission,不管你要删除的文件的permission
+
+
+directory permission :
+x gives you permission to actually be IN the directory and access the files in the directory, and r gives you permission to see the content of the directory
+
+如果只有x,没有r,并且下面的文件有权限访问,那么可以直接打开文件(前提是知道文件名),但是不能ls
+如果只有r没有x,可以ls文件,但是每个文件的详细信息(属主,大小)都是???
+
+如果有w,可以删除和添加新文件,这个操作跟文件本身权限无关
+
+
+常见目录 /usr == unix shared resouce
+
+/bin
+/dev
+/etc
+/etc/passwd
+/lib
+/tmp
+/usr
+/usr/lib
+/usr/include/
+/usr/include/sys
+/usr/bin
+/usr/src/
+/home/$name/bin
+
+
+ls /dev
+crw-rw-rw-  1 algerwang Domain Users   5,   2 十月 27 20:47 ptmx
+crw--w----  1 algerwang Domain Users 136,   0 十月 27 20:47 pty0
+crw-rw-rw-  1 algerwang Domain Users   1,   8 十月 27 20:47 random
+brw-rw-rw-  2 algerwang Domain Users  11,   0 十月 27 20:47 scd0
+brw-rw-rw-  1 algerwang Domain Users   8,   0 十月 27 20:47 sda
+brw-rw-rw-  1 algerwang Domain Users   8,   1 十月 27 20:47 sda1
+
+
+b = block device
+c = char device
+5,2 是major device number && minor device number,不日同一个终端的两个不同的tty,
+
+/etc/mount 有挂在设备信息,比如几个磁盘文件系统挂载在哪一个目录下
+
+
+tty 用于显示当前的console是哪一个设备,每一个设备都是可写的,因此可以
+date > /dev/pty1
+写到另外一个tty上
+
+date > /dev/null
+
+
+
+
+
+
+
+
+
+
+
+
+
